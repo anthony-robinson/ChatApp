@@ -1,6 +1,7 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import SearchBar from './SearchBar';
 function App() {
+	const [ term, setTerm ] = useState('');
 	return (
 		<div className="flex-1 flex flex-col min-h-screen h-screen">
 			<div className="flex text-white font-sans font-light">
@@ -13,13 +14,7 @@ function App() {
 						<div className="ml-2 text-sm text-white">general</div>
 					</div>
 					<div className="flex justify-center items-center">
-						<form className="flex justify-center">
-							<input
-								className="font-light rounded bg-gray-900 text-gray-200 text-xs px-2 py-1"
-								type="text"
-								placeholder="Search"
-							/>
-						</form>
+						<SearchBar searchText={(text) => setTerm(text)} />
 					</div>
 				</div>
 			</div>
