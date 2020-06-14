@@ -10,7 +10,7 @@ const FriendMessage = () => {
 					</a>
 					<span className="text-xs text-gray-600 ml-1">07/19/2020</span>
 				</div>
-				<div class="max-w-sm mx-auto flex px-3 py-2 bg-gray-300 rounded-lg shadow-xl">
+				<div class="max-w-sm mx-auto flex px-3 py-1 bg-white rounded-lg shadow-xl">
 					<div class="text-sm text-black font-light">Hey not much!</div>
 				</div>
 			</div>
