@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import SearchBar from './SearchBar';
+import MyMessage from './MyMessage';
+import CurrentChannel from './CurrentChannel';
+import FriendMessage from './FriendMessage';
 function App() {
 	const [ term, setTerm ] = useState('');
 	return (
@@ -9,10 +12,7 @@ function App() {
 					<div className="font-bold">Flack</div>
 				</div>
 				<div className="flex-1 bg-gray-700 flex items-center justify-between px-4 border-b border-gray-900">
-					<div className="flex items-center">
-						<div className="text-gray-500 text-2xl">#</div>
-						<div className="ml-2 text-sm text-white">general</div>
-					</div>
+					<CurrentChannel />
 					<div className="flex justify-center items-center">
 						<SearchBar searchText={(text) => setTerm(text)} />
 					</div>
@@ -32,24 +32,11 @@ function App() {
 						</ul>
 					</div>
 				</div>
-				<div className="bg-green-500 flex-1 flex justify-between">
+				<div className="bg-gray-600 flex-1 flex justify-end">
 					<div className="bg-gray-600 flex-1 overflow-y-auto">
-						<div className="text-sm text-gray-400 overflow-y-auto">
-							<div className="flex mx-6 my-3 py-4 border-t border-gray-700 ">
-								<div className="ml-5">
-									<div>
-										<a href="#" className="text-white hover:underline">
-											Anthony
-										</a>
-										<span className="text-xs text-gray-600 ml-1">07/19/2020</span>
-									</div>
-									<div>
-										<div>yeah haha</div>
-										<div>wyd today? wanna go hiking?</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<div className="text-sm text-gray-400 overflow-y-auto" />
+						<MyMessage />
+						<FriendMessage />
 					</div>
 
 					<div className="bg-indigo-600 w-56 flex-none overflow-y-auto">Display chat 2</div>
