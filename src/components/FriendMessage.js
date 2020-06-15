@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const FriendMessage = () => {
+const FriendMessage = ({ userMessage }) => {
 	return (
 		<div className="flex justify-start mx-6 my-3 py-4 border-gray-700 ">
 			<div className="mr-5">
@@ -10,8 +10,8 @@ const FriendMessage = () => {
 					</a>
 					<span className="text-xs text-gray-600 ml-1">07/19/2020</span>
 				</div>
-				<div class="max-w-sm mx-auto flex px-3 py-1 bg-white rounded-lg shadow-xl">
-					<div class="text-sm text-black font-light">Hey not much!</div>
+				<div class="max-w-sm mx-auto inline-block break-words px-3 py-1 bg-gray-100 rounded-lg shadow-xl ">
+					<div class="text-sm text-black font-light">{userMessage}</div>
 				</div>
 			</div>
 		</div>

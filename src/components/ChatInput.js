@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ChatInput = ({ inputText }) => {
 	const [ text, setTextValue ] = useState('');
 	const onSubmit = (e) => {
 		e.preventDefault();
-		inputText(text);
+		if (text != '') {
+			inputText(text);
+		}
 		console.log(text);
+		setTextValue('');
 	};
+
 	return (
 		<form
 			onSubmit={onSubmit}
@@ -15,6 +19,7 @@ const ChatInput = ({ inputText }) => {
 		>
 			<div className="flex-1">
 				<input
+					value={text}
 					onChange={(e) => setTextValue(e.target.value)}
 					type="text"
 					className="w-full font-light rounded bg-gray-700 text-gray-200 text-xs px-2 py-1 focus:outline-none"

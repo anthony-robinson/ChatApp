@@ -12,6 +12,7 @@ const App = () => {
 	const [ term, setTerm ] = useState('');
 	//array of messages to render in chat log.
 	const [ messages, setMessages ] = useState([]);
+	const [ message, setMessage ] = useState('');
 
 	return (
 		<div className="flex-1 flex flex-col min-h-screen h-screen">
@@ -47,12 +48,14 @@ const App = () => {
 							{messages.map(({ msg }, index) => (
 								<div key={index}>
 									<MyMessage userMessage={msg} />
+									<FriendMessage userMessage={msg} />
 								</div>
 							))}
 						</div>
 
 						<ChatInput
-							inputText={(msg) => setMessages([ { msg, complete: false, id: false }, ...messages ])}
+							value={(e) => setMessage(e)}
+							inputText={(msg) => setMessages([ ...messages, { msg, complete: false, id: false } ])}
 						/>
 					</div>
 				</div>
