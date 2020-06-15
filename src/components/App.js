@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import io from 'socket.io-client';
 import SearchBar from './SearchBar';
 import MyMessage from './MyMessage';
 import CurrentChannel from './CurrentChannel';
@@ -11,8 +12,6 @@ const App = () => {
 	const [ term, setTerm ] = useState('');
 	//array of messages to render in chat log.
 	const [ messages, setMessages ] = useState([]);
-	//any one particular message coming from an input
-	const [ message, setMessage ] = useState('');
 
 	return (
 		<div className="flex-1 flex flex-col min-h-screen h-screen">
@@ -45,12 +44,16 @@ const App = () => {
 				<div className="bg-red-600 flex-1 flex justify-between">
 					<div className="bg-gray-600 flex-1 flex flex-col justify-between">
 						<div className="overflow-y-auto text-sm text-gray-400 ">
-							<MyMessage userMessage={message} />
-							<FriendMessage />
-							{message}
+							{messages.map(({ msg }, index) => (
+								<div key={index}>
+									<MyMessage userMessage={msg} />
+								</div>
+							))}
 						</div>
 
-						<ChatInput inputText={(text) => setMessage(text)} />
+						<ChatInput
+							inputText={(msg) => setMessages([ { msg, complete: false, id: false }, ...messages ])}
+						/>
 					</div>
 				</div>
 				<div className="bg-indigo-600 w-56 flex-none overflow-y-auto">Display chat 2</div>
