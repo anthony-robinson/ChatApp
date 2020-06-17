@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import SearchBar from './SearchBar';
 import MyMessage from './MyMessage';
@@ -7,12 +7,27 @@ import FriendMessage from './FriendMessage';
 import ChatInput from './ChatInput';
 const App = () => {
 	//ID for sockets.
-	const [ yourID, setYourID ] = useState();
+	const [ yourID, setID ] = useState('');
 	//searchterm functionality
 	const [ term, setTerm ] = useState('');
 	//array of messages to render in chat log.
 	const [ messages, setMessages ] = useState([]);
-	const [ message, setMessage ] = useState('');
+
+	const socket = io.connect('/');
+	useEffect(() => {
+		socket.on('your id', (id) => {
+			setID(id);
+		});
+		socket.on('message', (message) => {
+			console.log('here at useEffect');
+			receivedMessage(message);
+		});
+	}, []);
+
+	function receivedMessage(message) {
+		console.log('set message form receiver called');
+		setMessages((msgArray) => [ ...msgArray, message ]);
+	}
 
 	return (
 		<div className="flex-1 flex flex-col min-h-screen h-screen">
@@ -45,18 +60,25 @@ const App = () => {
 				<div className="bg-red-600 flex-1 flex justify-between">
 					<div className="bg-gray-600 flex-1 flex flex-col justify-between">
 						<div className="overflow-y-auto text-sm text-gray-400 ">
-							{messages.map(({ msg }, index) => (
-								<div key={index}>
-									<MyMessage userMessage={msg} />
-									<FriendMessage userMessage={msg} />
-								</div>
-							))}
+							{messages.map((msg, index) => {
+								if (msg.id === yourID) {
+									console.log(msg.id);
+									return (
+										<div key={index}>
+											<MyMessage userMessage={msg.message} />
+										</div>
+									);
+								}
+								console.log(msg.id);
+								return (
+									<div key={index}>
+										<FriendMessage userMessage={msg.message} />
+									</div>
+								);
+							})}
 						</div>
 
-						<ChatInput
-							value={(e) => setMessage(e)}
-							inputText={(msg) => setMessages([ ...messages, { msg, complete: false, id: false } ])}
-						/>
+						<ChatInput childSocket={socket} ID={yourID} />
 					</div>
 				</div>
 				<div className="bg-indigo-600 w-56 flex-none overflow-y-auto">Display chat 2</div>

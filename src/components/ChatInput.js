@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-const ChatInput = ({ inputText }) => {
-	const [ text, setTextValue ] = useState('');
+const ChatInput = ({ childSocket, ID }) => {
+	const [ text, setTextValue ] = useState({ message: '', id: '' });
+
 	const onSubmit = (e) => {
 		e.preventDefault();
-		if (text != '') {
-			inputText(text);
+		if (text.message != '') {
+			console.log(text.message);
+			childSocket.emit('send message', text);
 		}
-		console.log(text);
-		setTextValue('');
+		setTextValue({ message: '' });
 	};
 
 	return (
@@ -19,8 +20,8 @@ const ChatInput = ({ inputText }) => {
 		>
 			<div className="flex-1">
 				<input
-					value={text}
-					onChange={(e) => setTextValue(e.target.value)}
+					value={text.message}
+					onChange={(e) => setTextValue({ message: e.target.value, id: ID })}
 					type="text"
 					className="w-full font-light rounded bg-gray-700 text-gray-200 text-xs px-2 py-1 focus:outline-none"
 					placeholder="Enter a message..."
