@@ -19,13 +19,11 @@ const App = () => {
 			setID(id);
 		});
 		socket.on('message', (message) => {
-			console.log('here at useEffect');
 			receivedMessage(message);
 		});
 	}, []);
 
 	function receivedMessage(message) {
-		console.log('set message form receiver called');
 		setMessages((msgArray) => [ ...msgArray, message ]);
 	}
 
