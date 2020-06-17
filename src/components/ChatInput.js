@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-const ChatInput = ({ childSocket, ID }) => {
+const ChatInput = ({ socketProp, ID }) => {
 	const [ text, setTextValue ] = useState({ message: '', id: '' });
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 		if (text.message != '') {
 			console.log(text.message);
-			childSocket.emit('send message', text);
+			socketProp.emit('send message', text);
 		}
 		setTextValue({ message: '' });
 	};

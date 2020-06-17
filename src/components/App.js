@@ -31,7 +31,7 @@ const App = () => {
 		<div className="flex-1 flex flex-col min-h-screen h-screen">
 			<div className="flex text-white font-sans font-light">
 				<div className="bg-gray-800 w-56 flex-none flex items-center justify-between px-3 py-2">
-					<div className="font-bold">Cool Chat App</div>
+					<div className="font-bold">Chat App</div>
 				</div>
 				<div className="flex-1 bg-gray-700 flex items-center justify-between px-4 border-b border-gray-900">
 					<CurrentChannel />
@@ -53,7 +53,7 @@ const App = () => {
 							</li>
 						</ul>
 					</div>
-					<div className="bg-green-500">here</div>
+					<div className="bg-gray-800 text-white">channel search goes here</div>
 				</div>
 				<div className="bg-red-600 flex-1 flex justify-between">
 					<div className="bg-gray-600 flex-1 flex flex-col justify-between">
@@ -76,10 +76,10 @@ const App = () => {
 							})}
 						</div>
 
-						<ChatInput childSocket={socket} ID={yourID} />
+						<ChatInput socketProp={socket} ID={yourID} />
 					</div>
+					<div className="bg-gray-700 w-56 flex-none overflow-y-auto">Users go here</div>
 				</div>
-				<div className="bg-indigo-600 w-56 flex-none overflow-y-auto">Display chat 2</div>
 			</div>
 		</div>
 	);
