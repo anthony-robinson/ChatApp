@@ -5,6 +5,7 @@ import MyMessage from './MyMessage';
 import CurrentChannel from './CurrentChannel';
 import FriendMessage from './FriendMessage';
 import ChatInput from './ChatInput';
+import ChannelInput from './ChannelInput';
 const App = () => {
 	//ID for sockets.
 	const [ yourID, setID ] = useState('');
@@ -53,7 +54,9 @@ const App = () => {
 							</li>
 						</ul>
 					</div>
-					<div className="bg-gray-800 text-white">channel search goes here</div>
+					<div className="bg-gray-800 text-white ">
+						<ChannelInput />
+					</div>
 				</div>
 				<div className="bg-red-600 flex-1 flex justify-between">
 					<div className="bg-gray-600 flex-1 flex flex-col justify-between">
