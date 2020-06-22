@@ -6,6 +6,7 @@ import CurrentChannel from './CurrentChannel';
 import FriendMessage from './FriendMessage';
 import ChatInput from './ChatInput';
 import ChannelInput from './ChannelInput';
+import Channel from './Channel';
 const App = () => {
 	//ID for sockets.
 	const [ yourID, setID ] = useState('');
@@ -13,6 +14,7 @@ const App = () => {
 	const [ term, setTerm ] = useState('');
 	//array of messages to render in chat log.
 	const [ messages, setMessages ] = useState([]);
+	const [ channels, setChannels ] = useState([]);
 
 	const socket = io.connect('/');
 	useEffect(() => {
@@ -27,6 +29,10 @@ const App = () => {
 	function receivedMessage(message) {
 		setMessages((msgArray) => [ ...msgArray, message ]);
 	}
+
+	const onChannelSubmit = (e) => {
+		setChannels(e.target.value);
+	};
 
 	return (
 		<div className="flex-1 flex flex-col min-h-screen h-screen">
@@ -46,16 +52,15 @@ const App = () => {
 				<div className="bg-gray-700 w-56 flex-none flex flex-col justify-between">
 					<div className="text-sm overflow-y-auto">
 						<ul className="px-2 py-3">
-							<li className="text-gray-500 px-2 hover:text-gray-200 hover:bg-gray-900">
-								<a href="#" class="flex items-center">
-									<span class="text-xl">#</span>
-									<span class="ml-2">welcome</span>
-								</a>
-							</li>
+							{channels.map((channels, index) => (
+								<div key={index}>
+									<Channel chatChannel={channels} />
+								</div>
+							))}
 						</ul>
 					</div>
 					<div className="bg-gray-800 text-white ">
-						<ChannelInput />
+						<ChannelInput channelText={(text) => setChannels([ ...channels, text ])} />
 					</div>
 				</div>
 				<div className="bg-red-600 flex-1 flex justify-between">

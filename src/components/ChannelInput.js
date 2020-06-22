@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 
-const ChannelInput = () => {
-	const [ text, setText ] = useState('');
+const ChannelInput = ({ channelText }) => {
+	const [ channelInputText, setChannelInputText ] = useState('');
+
+	const onChannelInput = (event) => {
+		event.preventDefault();
+		channelText(channelInputText);
+		setChannelInputText('');
+	};
+
 	return (
-		<form className="flex items-center">
+		<form className="flex items-center" onSubmit={onChannelInput}>
 			<button className="px-2 py-2 h-8 bg-gray-800 text-gray-500 hover:text-white border-rounded ">
 				<svg className="w-4 h-4 " fill="currentColor" aria-hidden="true" viewBox="0 0 448 512">
 					<path
@@ -15,6 +22,8 @@ const ChannelInput = () => {
 			<input
 				className="font-light w-full h-8 rounded bg-gray-900 text-gray-200 text-xs px-2 py-1 focus:outline-none"
 				placeholder="Add a #channel"
+				value={channelInputText}
+				onChange={(e) => setChannelInputText(e.target.value)}
 			/>
 		</form>
 	);
