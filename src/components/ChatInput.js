@@ -23,11 +23,11 @@ const ChatInput = ({ socketProp, ID }) => {
 					value={text.message}
 					onChange={(e) => setTextValue({ message: e.target.value, id: ID })}
 					type="text"
-					className="w-full font-light rounded bg-gray-700 text-gray-200 text-xs px-2 py-1 focus:outline-none"
+					className="w-full font-light h-8 rounded bg-gray-700 text-gray-200 text-xs px-2 py-1 focus:outline-none"
 					placeholder="Enter a message..."
 				/>
 			</div>
-			<button className="mr-2 px-5 font-normal text-sm text-white bg-blue-500 rounded hover:bg-blue-400">
+			<button className="transition duration-500 ease-in-out transform hover:scale-110 focus:outline-none mr-2 px-5 font-normal text-sm text-white bg-blue-500 rounded hover:bg-blue-400">
 				Send
 			</button>
 		</form>
